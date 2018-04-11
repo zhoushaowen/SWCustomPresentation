@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="N12-yt-iWz"/>
+                        <viewControllerLayoutGuide type="bottom" id="9HV-6b-Wx4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TRC-Jt-P6v">
+                                <rect key="frame" x="310" y="34" width="53" height="30"/>
+                                <state key="normal" title="present"/>
+                                <connections>
+                                    <action selector="presentAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gxz-B5-dbV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cS-gN-wVJ">
+                                <rect key="frame" x="305" y="84" width="62" height="30"/>
+                                <state key="normal" title="present2"/>
+                                <connections>
+                                    <action selector="presentAction2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MNu-dM-H95"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="TRC-Jt-P6v" secondAttribute="trailing" constant="12" id="0hE-Jz-aBb"/>
+                            <constraint firstAttribute="trailing" secondItem="3cS-gN-wVJ" secondAttribute="trailing" constant="8" id="SlI-6F-s64"/>
+                            <constraint firstItem="3cS-gN-wVJ" firstAttribute="top" secondItem="N12-yt-iWz" secondAttribute="bottom" constant="64" id="bdx-lg-n2k"/>
+                            <constraint firstItem="TRC-Jt-P6v" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="inB-9S-nfX"/>
+                            <constraint firstItem="TRC-Jt-P6v" firstAttribute="top" secondItem="N12-yt-iWz" secondAttribute="bottom" constant="14" id="nni-fR-ucs"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
