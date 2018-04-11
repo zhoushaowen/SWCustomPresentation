@@ -11,11 +11,11 @@
 		36BA9C83207DC4D400361D24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36BA9C82207DC4D400361D24 /* Assets.xcassets */; };
 		36BA9C86207DC4D400361D24 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36BA9C84207DC4D400361D24 /* LaunchScreen.storyboard */; };
 		36BA9C89207DC4D400361D24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA9C88207DC4D400361D24 /* main.m */; };
-		36BA9C94207DC52200361D24 /* UIViewController+SWCustomPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA9C90207DC52200361D24 /* UIViewController+SWCustomPresentation.m */; };
-		36BA9C95207DC52200361D24 /* SWAnimtedTransitioningModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA9C92207DC52200361D24 /* SWAnimtedTransitioningModel.m */; };
 		36BA9C97207DC55E00361D24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36BA9C96207DC55E00361D24 /* Main.storyboard */; };
 		36BA9C9C207DC57300361D24 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA9C99207DC57200361D24 /* ViewController.m */; };
 		36BA9C9D207DC57300361D24 /* PresentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA9C9B207DC57200361D24 /* PresentViewController.m */; };
+		36BA9CA3207DC70A00361D24 /* UIViewController+SWCustomPresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA9CA0207DC70A00361D24 /* UIViewController+SWCustomPresentation.m */; };
+		36BA9CA4207DC70A00361D24 /* SWAnimtedTransitioningModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BA9CA2207DC70A00361D24 /* SWAnimtedTransitioningModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,15 +26,15 @@
 		36BA9C85207DC4D400361D24 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		36BA9C87207DC4D400361D24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		36BA9C88207DC4D400361D24 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		36BA9C90207DC52200361D24 /* UIViewController+SWCustomPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SWCustomPresentation.m"; sourceTree = "<group>"; };
-		36BA9C91207DC52200361D24 /* SWAnimtedTransitioningModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAnimtedTransitioningModel.h; sourceTree = "<group>"; };
-		36BA9C92207DC52200361D24 /* SWAnimtedTransitioningModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAnimtedTransitioningModel.m; sourceTree = "<group>"; };
-		36BA9C93207DC52200361D24 /* UIViewController+SWCustomPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SWCustomPresentation.h"; sourceTree = "<group>"; };
 		36BA9C96207DC55E00361D24 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		36BA9C98207DC57200361D24 /* PresentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentViewController.h; sourceTree = "<group>"; };
 		36BA9C99207DC57200361D24 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		36BA9C9A207DC57200361D24 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		36BA9C9B207DC57200361D24 /* PresentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentViewController.m; sourceTree = "<group>"; };
+		36BA9C9F207DC70A00361D24 /* SWAnimtedTransitioningModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAnimtedTransitioningModel.h; sourceTree = "<group>"; };
+		36BA9CA0207DC70A00361D24 /* UIViewController+SWCustomPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SWCustomPresentation.m"; sourceTree = "<group>"; };
+		36BA9CA1207DC70A00361D24 /* UIViewController+SWCustomPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SWCustomPresentation.h"; sourceTree = "<group>"; };
+		36BA9CA2207DC70A00361D24 /* SWAnimtedTransitioningModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAnimtedTransitioningModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +67,7 @@
 		36BA9C78207DC4D200361D24 /* SWCustomPresentation */ = {
 			isa = PBXGroup;
 			children = (
-				36BA9C8F207DC50A00361D24 /* SWCustomPresentation */,
+				36BA9C9E207DC70A00361D24 /* SWCustomPresentation */,
 				36BA9C79207DC4D200361D24 /* AppDelegate.h */,
 				36BA9C7A207DC4D200361D24 /* AppDelegate.m */,
 				36BA9C98207DC57200361D24 /* PresentViewController.h */,
@@ -83,16 +83,15 @@
 			path = SWCustomPresentation;
 			sourceTree = "<group>";
 		};
-		36BA9C8F207DC50A00361D24 /* SWCustomPresentation */ = {
+		36BA9C9E207DC70A00361D24 /* SWCustomPresentation */ = {
 			isa = PBXGroup;
 			children = (
-				36BA9C91207DC52200361D24 /* SWAnimtedTransitioningModel.h */,
-				36BA9C92207DC52200361D24 /* SWAnimtedTransitioningModel.m */,
-				36BA9C93207DC52200361D24 /* UIViewController+SWCustomPresentation.h */,
-				36BA9C90207DC52200361D24 /* UIViewController+SWCustomPresentation.m */,
+				36BA9C9F207DC70A00361D24 /* SWAnimtedTransitioningModel.h */,
+				36BA9CA2207DC70A00361D24 /* SWAnimtedTransitioningModel.m */,
+				36BA9CA1207DC70A00361D24 /* UIViewController+SWCustomPresentation.h */,
+				36BA9CA0207DC70A00361D24 /* UIViewController+SWCustomPresentation.m */,
 			);
-			name = SWCustomPresentation;
-			path = SWCustomPresentation/SWCustomPresentation;
+			path = SWCustomPresentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,11 +164,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36BA9C95207DC52200361D24 /* SWAnimtedTransitioningModel.m in Sources */,
 				36BA9C89207DC4D400361D24 /* main.m in Sources */,
+				36BA9CA3207DC70A00361D24 /* UIViewController+SWCustomPresentation.m in Sources */,
+				36BA9CA4207DC70A00361D24 /* SWAnimtedTransitioningModel.m in Sources */,
 				36BA9C9D207DC57300361D24 /* PresentViewController.m in Sources */,
 				36BA9C7B207DC4D200361D24 /* AppDelegate.m in Sources */,
-				36BA9C94207DC52200361D24 /* UIViewController+SWCustomPresentation.m in Sources */,
 				36BA9C9C207DC57300361D24 /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

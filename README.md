@@ -3,7 +3,7 @@
 
 导入方式:
 
-##pod 'SWCustomPresentation'## 
+### pod 'SWCustomPresentation'
 
 截图 
 
