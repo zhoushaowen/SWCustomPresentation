@@ -39,8 +39,15 @@
 - (UITapGestureRecognizer *)singleTapGesture {
     if(!_singleTapGesture){
         _singleTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+        _singleTapGesture.delegate = self;
     }
     return _singleTapGesture;
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if(touch.view != gestureRecognizer.view) return NO;
+    return YES;
 }
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)gesture {

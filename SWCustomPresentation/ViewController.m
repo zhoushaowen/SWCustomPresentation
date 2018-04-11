@@ -7,9 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "UIViewController+SWCustomPresentation.h"
-#import "SWAnimtedTransitioningModel.h"
 #import "PresentViewController.h"
+#import "SWCustomPresentation.h"
 
 @interface ViewController ()
 

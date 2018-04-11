@@ -35,6 +35,7 @@
 		36BA9CA0207DC70A00361D24 /* UIViewController+SWCustomPresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SWCustomPresentation.m"; sourceTree = "<group>"; };
 		36BA9CA1207DC70A00361D24 /* UIViewController+SWCustomPresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SWCustomPresentation.h"; sourceTree = "<group>"; };
 		36BA9CA2207DC70A00361D24 /* SWAnimtedTransitioningModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAnimtedTransitioningModel.m; sourceTree = "<group>"; };
+		36BA9CA8207DE96F00361D24 /* SWCustomPresentation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SWCustomPresentation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +91,7 @@
 				36BA9CA2207DC70A00361D24 /* SWAnimtedTransitioningModel.m */,
 				36BA9CA1207DC70A00361D24 /* UIViewController+SWCustomPresentation.h */,
 				36BA9CA0207DC70A00361D24 /* UIViewController+SWCustomPresentation.m */,
+				36BA9CA8207DE96F00361D24 /* SWCustomPresentation.h */,
 			);
 			path = SWCustomPresentation;
 			sourceTree = "<group>";

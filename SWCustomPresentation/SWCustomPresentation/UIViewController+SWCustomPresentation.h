@@ -29,7 +29,7 @@
 
 @end
 
-@interface SWPresentationController : UIPresentationController
+@interface SWPresentationController : UIPresentationController<UIGestureRecognizerDelegate>
 
 /**
  转场控制器的容器视图上的单击手势,单击可以dismiss控制器,如果不需要禁止掉手势即可
