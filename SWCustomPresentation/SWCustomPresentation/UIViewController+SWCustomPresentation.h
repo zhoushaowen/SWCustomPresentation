@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol SWAnimatedTransitioning <UIViewControllerAnimatedTransitioning>
+@protocol SWAnimatedTransitioning <NSObject>
 
 @optional
 
@@ -38,7 +38,7 @@
 
 @end
 
-@interface UIViewController (SWCustomPresentation)<UIViewControllerTransitioningDelegate>
+@interface UIViewController (SWCustomPresentation)<UIViewControllerTransitioningDelegate,UIViewControllerAnimatedTransitioning>
 
 /**
  模态出一个可以自定义转场动画的控制器

@@ -10,27 +10,6 @@
 
 @implementation SWAnimtedTransitioningModel
 
-- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-    if([self respondsToSelector:@selector(sw_transitionDuration:)]){
-        return [self sw_transitionDuration:transitionContext];
-    }
-    return 0.0;
-}
-
-- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
-    UIView *fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
-    UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
-    if(toView){//present
-        if([self respondsToSelector:@selector(sw_animateTransitionForPresent:)]){
-            [self sw_animateTransitionForPresent:transitionContext];
-        }
-    }else if (fromView){//dismiss
-        if([self respondsToSelector:@selector(sw_animateTransitionForDismiss:)]){
-            [self sw_animateTransitionForDismiss:transitionContext];
-        }
-    }
-}
-
 - (void)sw_animateTransitionForPresent:(id<UIViewControllerContextTransitioning>)transitionContext {
     UIView *containerView = [transitionContext containerView];
     UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];

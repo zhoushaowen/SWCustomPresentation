@@ -65,11 +65,18 @@ static void *Key_sw_presentationController = &Key_sw_presentationController;
 static void *Key_containerViewWillLayoutSubViewsBlock = &Key_containerViewWillLayoutSubViewsBlock;
 static void *Key_containerViewDidLayoutSubViewsBlock = &Key_containerViewDidLayoutSubViewsBlock;
 static void *Key_sw_animatedTransitioning = &Key_sw_animatedTransitioning;
+static void *Key_animatedTransitioningType = &Key_animatedTransitioningType;
+
+typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
+    SWAnimatedTransitioningPresentType,
+    SWAnimatedTransitioningDismissType,
+};
 
 @interface UIViewController ()
 
 @property (nonatomic,strong) void(^containerViewWillLayoutSubViewsBlock)(SWPresentationController *);
 @property (nonatomic,strong) id<SWAnimatedTransitioning> sw_animatedTransitioning;
+@property (nonatomic) SWAnimatedTransitioningType animatedTransitioningType;
 
 @end
 
@@ -83,6 +90,7 @@ static void *Key_sw_animatedTransitioning = &Key_sw_animatedTransitioning;
     [self presentViewController:controller animated:YES completion:completion];
 }
 
+#pragma mark - UIViewControllerTransitioningDelegate
 - (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source {
     SWPresentationController *presentationController = [[SWPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
     presentationController.willLayoutSubViewsBlock = self.containerViewWillLayoutSubViewsBlock;
@@ -90,13 +98,35 @@ static void *Key_sw_animatedTransitioning = &Key_sw_animatedTransitioning;
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    if(self.sw_animatedTransitioning && [self.sw_animatedTransitioning respondsToSelector:@selector(sw_animateTransitionForPresent:)]) return self.sw_animatedTransitioning;
+    self.animatedTransitioningType = SWAnimatedTransitioningPresentType;
+    if(self.sw_animatedTransitioning && [self.sw_animatedTransitioning respondsToSelector:@selector(sw_animateTransitionForPresent:)]) return self;
     return nil;
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    if(self.sw_animatedTransitioning && [self.sw_animatedTransitioning respondsToSelector:@selector(sw_animateTransitionForDismiss:)]) return self.sw_animatedTransitioning;
+    self.animatedTransitioningType = SWAnimatedTransitioningDismissType;
+    if(self.sw_animatedTransitioning && [self.sw_animatedTransitioning respondsToSelector:@selector(sw_animateTransitionForDismiss:)]) return self;
     return nil;
+}
+
+#pragma mark - UIViewControllerAnimatedTransitioning
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+    if([self.sw_animatedTransitioning respondsToSelector:@selector(sw_transitionDuration:)]){
+        return [self.sw_animatedTransitioning sw_transitionDuration:transitionContext];
+    }
+    return 0.0;
+}
+
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+    if(self.animatedTransitioningType == SWAnimatedTransitioningPresentType){//present
+        if([self.sw_animatedTransitioning respondsToSelector:@selector(sw_animateTransitionForPresent:)]){
+            [self.sw_animatedTransitioning sw_animateTransitionForPresent:transitionContext];
+        }
+    }else if (self.animatedTransitioningType == SWAnimatedTransitioningDismissType){//dismiss
+        if([self.sw_animatedTransitioning respondsToSelector:@selector(sw_animateTransitionForDismiss:)]){
+            [self.sw_animatedTransitioning sw_animateTransitionForDismiss:transitionContext];
+        }
+    }
 }
 
 #pragma mark - Getter&Setter
@@ -116,7 +146,13 @@ static void *Key_sw_animatedTransitioning = &Key_sw_animatedTransitioning;
     return objc_getAssociatedObject(self, Key_sw_animatedTransitioning);
 }
 
+- (void)setAnimatedTransitioningType:(SWAnimatedTransitioningType)animatedTransitioningType {
+    objc_setAssociatedObject(self, Key_animatedTransitioningType, @(animatedTransitioningType), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
+- (SWAnimatedTransitioningType)animatedTransitioningType {
+    return [objc_getAssociatedObject(self, Key_animatedTransitioningType) integerValue];
+}
 
 
 
