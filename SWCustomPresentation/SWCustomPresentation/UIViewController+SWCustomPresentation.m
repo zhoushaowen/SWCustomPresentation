@@ -51,6 +51,8 @@
 }
 
 - (void)handleTapGesture:(UITapGestureRecognizer *)gesture {
+    //解决IQKeyboard和UITextview或者UITextField存在的情况下 dismiss页面的时候跳动的bug
+    [self.presentedViewController.view endEditing:YES];
     [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
