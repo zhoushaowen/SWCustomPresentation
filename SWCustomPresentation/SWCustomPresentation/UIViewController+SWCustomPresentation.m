@@ -9,9 +9,30 @@
 #import "UIViewController+SWCustomPresentation.h"
 #import <objc/runtime.h>
 
+static void *Key_sw_presentationController = &Key_sw_presentationController;
+static void *Key_containerViewWillLayoutSubViewsBlock = &Key_containerViewWillLayoutSubViewsBlock;
+static void *Key_containerViewDidLayoutSubViewsBlock = &Key_containerViewDidLayoutSubViewsBlock;
+static void *Key_sw_animatedTransitioning = &Key_sw_animatedTransitioning;
+static void *Key_animatedTransitioningType = &Key_animatedTransitioningType;
+static void *Key_sw_presentationControllerDelegate = &Key_sw_presentationControllerDelegate;
+
+typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
+    SWAnimatedTransitioningPresentType,
+    SWAnimatedTransitioningDismissType,
+};
+
+@interface UIViewController ()
+
+@property (nonatomic,strong) void(^containerViewWillLayoutSubViewsBlock)(SWPresentationController *);
+@property (nonatomic,weak) id<SWAnimatedTransitioning> sw_animatedTransitioning;
+@property (nonatomic) SWAnimatedTransitioningType animatedTransitioningType;
+@property (nonatomic,weak) id<SWPresentationControllerDelegate> sw_presentationControllerDelegate;
+
+@end
+
 @interface SWPresentationController ()
 
-@property (nonatomic,strong) void(^willLayoutSubViewsBlock)(SWPresentationController *);
+@property (nonatomic,strong) void(^willLayoutSubViewsBlock)(SWPresentationController *) __deprecated;
 
 @end
 
@@ -19,22 +40,56 @@
 
 @synthesize singleTapGesture = _singleTapGesture;
 
+- (CGRect)frameOfPresentedViewInContainerView {
+    if(self.presentedViewController.sw_presentationControllerDelegate && [self.presentedViewController.sw_presentationControllerDelegate respondsToSelector:@selector(sw_presentationController_frameOfPresentedViewInContainerView:)]){
+        return [self.presentedViewController.sw_presentationControllerDelegate sw_presentationController_frameOfPresentedViewInContainerView:self];
+    }else{
+        return [super frameOfPresentedViewInContainerView];
+    }
+}
+
 - (void)containerViewWillLayoutSubviews {
     [super containerViewWillLayoutSubviews];
-    if(self.singleTapGesture.view == nil){
-        [self.containerView addGestureRecognizer:self.singleTapGesture];
-    }
-    CGRect rect = self.presentedView.frame;
-    self.containerView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
-    rect.size.width = self.containerView.bounds.size.width - 80;
-    rect.size.height = self.containerView.bounds.size.height - 100;
-    rect.origin.x = (self.containerView.bounds.size.width - rect.size.width)/2.0f;
-    rect.origin.y = (self.containerView.bounds.size.height - rect.size.height)/2.0f;
-    self.presentedView.frame = rect;
     if(self.willLayoutSubViewsBlock){
         self.willLayoutSubViewsBlock(self);
     }
+    if(self.presentedViewController.sw_presentationControllerDelegate && [self.presentedViewController.sw_presentationControllerDelegate respondsToSelector:@selector(sw_presentationController_containerViewWillLayoutSubviews:)]){
+        [self.presentedViewController.sw_presentationControllerDelegate sw_presentationController_containerViewWillLayoutSubviews:self];
+    }
 }
+- (void)containerViewDidLayoutSubviews {
+    [super containerViewDidLayoutSubviews];
+    if(self.presentedViewController.sw_presentationControllerDelegate && [self.presentedViewController.sw_presentationControllerDelegate respondsToSelector:@selector(sw_presentationController_containerViewDidLayoutSubviews:)]){
+        [self.presentedViewController.sw_presentationControllerDelegate sw_presentationController_containerViewDidLayoutSubviews:self];
+    }
+}
+- (void)presentationTransitionWillBegin {
+    self.containerView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3f];
+    if(self.singleTapGesture.view == nil){
+        [self.containerView addGestureRecognizer:self.singleTapGesture];
+    }
+    if(self.presentedViewController.sw_presentationControllerDelegate && [self.presentedViewController.sw_presentationControllerDelegate respondsToSelector:@selector(sw_presentationController_presentationTransitionWillBegin:)]){
+        [self.presentedViewController.sw_presentationControllerDelegate sw_presentationController_presentationTransitionWillBegin:self];
+    }
+}
+
+- (void)presentationTransitionDidEnd:(BOOL)completed {
+    if(self.presentedViewController.sw_presentationControllerDelegate && [self.presentedViewController.sw_presentationControllerDelegate respondsToSelector:@selector(sw_presentationController:presentationTransitionDidEnd:)]){
+        [self.presentedViewController.sw_presentationControllerDelegate sw_presentationController:self presentationTransitionDidEnd:completed];
+    }
+}
+- (void)dismissalTransitionWillBegin {
+    if(self.presentedViewController.sw_presentationControllerDelegate && [self.presentedViewController.sw_presentationControllerDelegate respondsToSelector:@selector(sw_presentationController_dismissalTransitionWillBegin:)]){
+        [self.presentedViewController.sw_presentationControllerDelegate sw_presentationController_dismissalTransitionWillBegin:self];
+    }
+}
+- (void)dismissalTransitionDidEnd:(BOOL)completed {
+    if(self.presentedViewController.sw_presentationControllerDelegate && [self.presentedViewController.sw_presentationControllerDelegate respondsToSelector:@selector(sw_presentationController:dismissalTransitionDidEnd:)]){
+        [self.presentedViewController.sw_presentationControllerDelegate sw_presentationController:self dismissalTransitionDidEnd:completed];
+    }
+}
+
+
 
 - (UITapGestureRecognizer *)singleTapGesture {
     if(!_singleTapGesture){
@@ -63,33 +118,22 @@
 @end
 
 
-static void *Key_sw_presentationController = &Key_sw_presentationController;
-static void *Key_containerViewWillLayoutSubViewsBlock = &Key_containerViewWillLayoutSubViewsBlock;
-static void *Key_containerViewDidLayoutSubViewsBlock = &Key_containerViewDidLayoutSubViewsBlock;
-static void *Key_sw_animatedTransitioning = &Key_sw_animatedTransitioning;
-static void *Key_animatedTransitioningType = &Key_animatedTransitioningType;
-
-typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
-    SWAnimatedTransitioningPresentType,
-    SWAnimatedTransitioningDismissType,
-};
-
-@interface UIViewController ()
-
-@property (nonatomic,strong) void(^containerViewWillLayoutSubViewsBlock)(SWPresentationController *);
-@property (nonatomic,strong) id<SWAnimatedTransitioning> sw_animatedTransitioning;
-@property (nonatomic) SWAnimatedTransitioningType animatedTransitioningType;
-
-@end
-
 @implementation UIViewController (SWCustomPresentation)
 
-- (void)sw_presentCustomModalPresentationWithViewController:(UIViewController *__nonnull)controller containerViewWillLayoutSubViewsBlock:(void(^__nullable)(SWPresentationController *__nonnull presentationController))willLayoutSubViewsBlock animatedTransitioningModel:(id<SWAnimatedTransitioning> __nullable)animatedTransitioning completion:(void(^__nullable)(void))completion {
+- (void)sw_presentCustomModalPresentationWithViewController:(UIViewController *__nonnull)controller containerViewWillLayoutSubViewsBlock:(void(^__nullable)(SWPresentationController *__nonnull presentationController))willLayoutSubViewsBlock animatedTransitioningModel:(id<SWAnimatedTransitioning> __nullable)animatedTransitioning completion:(void(^__nullable)(void))completion __deprecated {
     controller.modalPresentationStyle = UIModalPresentationCustom;
     controller.transitioningDelegate = self;
     self.containerViewWillLayoutSubViewsBlock = willLayoutSubViewsBlock;
     self.sw_animatedTransitioning = animatedTransitioning;
     [self presentViewController:controller animated:YES completion:completion];
+}
+
+- (void)sw_presentCustomModalPresentationWithPresentedController:(UIViewController *__nonnull)presentedController delegate:(id<SWPresentationControllerDelegate>)delegate animatedTransitioningModel:(id<SWAnimatedTransitioning> __nullable)animatedTransitioning completion:(void(^__nullable)(void))completion {
+    presentedController.modalPresentationStyle = UIModalPresentationCustom;
+    presentedController.transitioningDelegate = self;
+    presentedController.sw_presentationControllerDelegate = delegate;
+    self.sw_animatedTransitioning = animatedTransitioning;
+    [self presentViewController:presentedController animated:YES completion:completion];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
@@ -141,7 +185,7 @@ typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
 }
 
 - (void)setSw_animatedTransitioning:(id<SWAnimatedTransitioning>)sw_animatedTransitioning {
-    objc_setAssociatedObject(self, Key_sw_animatedTransitioning, sw_animatedTransitioning, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, Key_sw_animatedTransitioning, sw_animatedTransitioning, OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (id<SWAnimatedTransitioning>)sw_animatedTransitioning {
@@ -156,6 +200,13 @@ typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
     return [objc_getAssociatedObject(self, Key_animatedTransitioningType) integerValue];
 }
 
+- (void)setSw_presentationControllerDelegate:(id<SWPresentationControllerDelegate>)sw_presentationControllerDelegate {
+    objc_setAssociatedObject(self, Key_sw_presentationControllerDelegate, sw_presentationControllerDelegate, OBJC_ASSOCIATION_ASSIGN);
+}
+
+- (id<SWPresentationControllerDelegate>)sw_presentationControllerDelegate {
+    return objc_getAssociatedObject(self, Key_sw_presentationControllerDelegate);
+}
 
 
 
