@@ -40,13 +40,13 @@ typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
 
 @synthesize singleTapGesture = _singleTapGesture;
 
-- (CGRect)frameOfPresentedViewInContainerView {
-    if(self.presentedViewController.sw_presentationControllerDelegate && [self.presentedViewController.sw_presentationControllerDelegate respondsToSelector:@selector(sw_presentationController_frameOfPresentedViewInContainerView:)]){
-        return [self.presentedViewController.sw_presentationControllerDelegate sw_presentationController_frameOfPresentedViewInContainerView:self];
-    }else{
-        return [super frameOfPresentedViewInContainerView];
-    }
-}
+//- (CGRect)frameOfPresentedViewInContainerView {
+//    if(self.presentedViewController.sw_presentationControllerDelegate && [self.presentedViewController.sw_presentationControllerDelegate respondsToSelector:@selector(sw_presentationController_frameOfPresentedViewInContainerView:)]){
+//        return [self.presentedViewController.sw_presentationControllerDelegate sw_presentationController_frameOfPresentedViewInContainerView:self];
+//    }else{
+//        return [super frameOfPresentedViewInContainerView];
+//    }
+//}
 
 - (void)containerViewWillLayoutSubviews {
     [super containerViewWillLayoutSubviews];

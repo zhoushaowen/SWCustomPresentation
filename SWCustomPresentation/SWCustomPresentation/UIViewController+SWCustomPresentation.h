@@ -35,8 +35,7 @@
 
 @optional
 
-///this method will be invoke after 'sw_presentationController_presentationTransitionWillBegin'  you can change the containerView frame with this method.
-- (CGRect)sw_presentationController_frameOfPresentedViewInContainerView:(SWPresentationController *)presentationController;
+//- (CGRect)sw_presentationController_frameOfPresentedViewInContainerView:(SWPresentationController *)presentationController;
 ///you can change the containerView frame with this method.
 - (void)sw_presentationController_containerViewWillLayoutSubviews:(SWPresentationController *)presentationController;
 ///you can change the containerView frame with this method.
