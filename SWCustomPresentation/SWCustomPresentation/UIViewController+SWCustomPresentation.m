@@ -132,6 +132,7 @@ typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
     presentedController.modalPresentationStyle = UIModalPresentationCustom;
     presentedController.transitioningDelegate = self;
     presentedController.sw_presentationControllerDelegate = delegate;
+    self.containerViewWillLayoutSubViewsBlock = nil;
     self.sw_animatedTransitioning = animatedTransitioning;
     [self presentViewController:presentedController animated:YES completion:completion];
 }
