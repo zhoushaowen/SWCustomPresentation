@@ -24,9 +24,9 @@ typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
 @interface UIViewController ()
 
 @property (nonatomic,strong) void(^containerViewWillLayoutSubViewsBlock)(SWPresentationController *);
-@property (nonatomic,weak) id<SWAnimatedTransitioning> sw_animatedTransitioning;
+@property (nonatomic,strong) id<SWAnimatedTransitioning> sw_animatedTransitioning;
 @property (nonatomic) SWAnimatedTransitioningType animatedTransitioningType;
-@property (nonatomic,weak) id<SWPresentationControllerDelegate> sw_presentationControllerDelegate;
+@property (nonatomic,strong) id<SWPresentationControllerDelegate> sw_presentationControllerDelegate;
 
 @end
 
@@ -84,12 +84,12 @@ typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
     }
 }
 - (void)dismissalTransitionDidEnd:(BOOL)completed {
+    self.presentedViewController.sw_animatedTransitioning = nil;
+    self.presentedViewController.sw_presentationControllerDelegate = nil;
     if(self.presentedViewController.sw_presentationControllerDelegate && [self.presentedViewController.sw_presentationControllerDelegate respondsToSelector:@selector(sw_presentationController:dismissalTransitionDidEnd:)]){
         [self.presentedViewController.sw_presentationControllerDelegate sw_presentationController:self dismissalTransitionDidEnd:completed];
     }
 }
-
-
 
 - (UITapGestureRecognizer *)singleTapGesture {
     if(!_singleTapGesture){
@@ -112,6 +112,8 @@ typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
 }
 
 - (void)dealloc {
+    self.presentedViewController.sw_animatedTransitioning = nil;
+    self.presentedViewController.sw_presentationControllerDelegate = nil;
     NSLog(@"%s",__func__);
 }
 
@@ -186,7 +188,7 @@ typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
 }
 
 - (void)setSw_animatedTransitioning:(id<SWAnimatedTransitioning>)sw_animatedTransitioning {
-    objc_setAssociatedObject(self, Key_sw_animatedTransitioning, sw_animatedTransitioning, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, Key_sw_animatedTransitioning, sw_animatedTransitioning, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (id<SWAnimatedTransitioning>)sw_animatedTransitioning {
@@ -202,7 +204,7 @@ typedef NS_ENUM(NSUInteger, SWAnimatedTransitioningType) {
 }
 
 - (void)setSw_presentationControllerDelegate:(id<SWPresentationControllerDelegate>)sw_presentationControllerDelegate {
-    objc_setAssociatedObject(self, Key_sw_presentationControllerDelegate, sw_presentationControllerDelegate, OBJC_ASSOCIATION_ASSIGN);
+    objc_setAssociatedObject(self, Key_sw_presentationControllerDelegate, sw_presentationControllerDelegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (id<SWPresentationControllerDelegate>)sw_presentationControllerDelegate {
